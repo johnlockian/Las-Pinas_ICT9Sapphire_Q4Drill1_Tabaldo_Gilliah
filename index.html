@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditionals</title>
+</head>
+<style>
+body{
+    font-family: Helvetica;
+    margin-top: 80px;
+    background-color: rgb(156, 156, 156);
+    display: flex;
+}
+
+.container{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    width: 400px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 20px;
+    text-align: center;
+}
+
+input{
+    padding: 6px;
+    width: 80%;
+    margin-bottom: 10px;
+    color: rgb(0, 0, 0);
+    border-radius: 8px;
+    border: 1px solid rgb(200, 200, 200);
+    padding: 10px;
+    display: block;
+}
+
+button{
+    padding: 6px;
+    width: 80%;
+    background-color: rgb(30, 30, 30);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+output{
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+}
+</style>
+<body>
+    <div class="container">
+<h3>Electricity Consumption Classifier.</h3>
+<img src="meter.png">
+<details>
+    <summary style="text-align: justify;">Consumption Categories:
+    </summary>
+<p style="text-align: justify;">
+<strong>1. Lifeline Consumer:</strong> 0-100 kWh<br>
+<strong>2. Low Consumption:</strong> 101-200 kWh<br>
+<strong>3. Average Consumption:</strong> 201-300 kWh<br>
+<strong>4. High Consumption:</strong> 301-500 kWh<br>
+<strong>5. Very High Consumption:</strong> Above 500 kWh</p>
+</details>
+<br>
+<input type="number" id="score" placeholder="Enter your energy consumption (kWh):">
+<button onclick="evaluateConsumption()">Evaluate</button>
+
+<div class="output">
+<p id="status"style="text-align: left;"></p><br>
+<p id="grade" style="text-align: left;"></p>
+</div>
+
+    </div>
+
+
+    <script>
+function evaluateConsumption() {
+var electricityScore = document.getElementById("score").value;
+
+if (electricityScore === ""){
+    alert("Please enter your energy consumption (kWh).");
+return;
+}
+
+
+electricityScore=Number(electricityScore);
+var elecStatus = "";
+
+var elecGrade = "";
+if(electricityScore >= 0 && electricityScore <= 100){elecGrade = "Lifeline Consumer.";} 
+else if(electricityScore >= 101 && electricityScore <= 200){ elecGrade = "Low Consumption."; }
+else if(electricityScore >= 201 && electricityScore <= 300){ elecGrade = "Average Consumption."; }
+else if(electricityScore >= 301 && electricityScore <= 500){ elecGrade = "High Consumption."; }
+else{ elecGrade = "Very High Consumption."; }
+
+var elecRemark = "";
+switch (elecGrade) {
+    case "Lifeline Consumer.":
+        elecRemark = "Discounted electricity rates available.";
+        break;
+    case "Low Consumption.":
+        elecRemark = "Typical electricity usage.";
+        break;
+    case "Average Consumption.":
+        elecRemark = "Higher electricity usage..";
+        break;
+    default:
+        elecRemark = "Heavy electricity users.";
+}
+
+document.getElementById("status").innerHTML = elecStatus;
+document.getElementById("grade").innerHTML = "<strong>Category:</strong> " + elecGrade + "<br>" + "<strong>Remarks:</strong> " + elecRemark;
+
+}
+    </script>
+    
+</body>
+</html>
